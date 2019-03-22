@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`List #checkList 1`] = `"Argument must be list, but it was 'test'"`;
+
+exports[`List #checkList 2`] = `"Argument must be list, but it was '1'"`;
+
+exports[`List #checkList 3`] = `"Argument must be list, but it was 'mytext'"`;
