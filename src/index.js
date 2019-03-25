@@ -119,14 +119,22 @@ const concat = (list1, list2) => {
   return pairs.cons(head(list1), concat(tail(list1), list2));
 };
 
-const map = (f, elements) => {
-  checkList(elements);
-  if (isEmpty(elements)) {
+const map = (f, list) => {
+  checkList(list);
+  if (isEmpty(list)) {
     return cons();
   }
-  return push(f(head(elements)), map(f, tail(elements)));
+  return push(f(head(list)), map(f, tail(list)));
+};
+
+const filter = (f, list) => {
+  checkList(list);
+  if (isEmpty(list)) {
+    return cons();
+  }
+  return f(head(list)) ? push(head(list), filter(f, tail(list))) : filter(f, tail(list));
 };
 
 export {
-  cons, head, tail, isEmpty, toString, has, count, reverse, isList, push, concat, map,
+  cons, head, tail, isEmpty, toString, has, count, reverse, isList, push, concat, map, filter,
 };
