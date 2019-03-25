@@ -135,6 +135,14 @@ const filter = (f, list) => {
   return f(head(list)) ? push(head(list), filter(f, tail(list))) : filter(f, tail(list));
 };
 
+const reduce = (f, acc, elements) => {
+  if (isEmpty(elements)) {
+    return acc;
+  }
+
+  return reduce(f, f(head(elements), acc), tail(elements));
+};
+
 export {
-  cons, head, tail, isEmpty, toString, has, count, reverse, isList, push, concat, map, filter,
+  cons, head, tail, isEmpty, toString, has, count, reverse, isList, push, concat, map, filter, reduce,
 };

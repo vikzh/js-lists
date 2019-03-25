@@ -1,5 +1,5 @@
 import {
-  cons, head, tail, isEmpty, isList, reverse, toString, push, count, concat, map, filter,
+  cons, head, tail, isEmpty, isList, reverse, toString, push, count, concat, map, filter, reduce,
 } from '../src';
 
 describe('List', () => {
@@ -95,5 +95,11 @@ describe('List', () => {
     const list = cons(-3, 2, 0, 5);
     const filteredList = filter(el => el > 0, list);
     expect(toString(filteredList)).toBe('(2, 5)');
+  });
+
+  it('#reduce', () => {
+    const list = cons(1, 2, 3, 4);
+    const symOfElements = reduce((element, acc) => acc + element, 0, list);
+    expect(symOfElements).toBe(10);
   });
 });
