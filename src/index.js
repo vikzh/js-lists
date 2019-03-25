@@ -121,15 +121,10 @@ const concat = (list1, list2) => {
 
 const map = (f, elements) => {
   checkList(elements);
-
-  const iter = (curElements, acc) => {
-    if (isEmpty(curElements)) {
-      return reverse(acc);
-    }
-
-    return iter(tail(curElements), push(f(head(curElements)), acc));
-  };
-  return iter(elements, cons());
+  if (isEmpty(elements)) {
+    return cons();
+  }
+  return push(f(head(elements)), map(f, tail(elements)));
 };
 
 export {
