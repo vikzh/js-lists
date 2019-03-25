@@ -1,5 +1,5 @@
 import {
-  cons, head, tail, isEmpty, isList, reverse, toString, push, count, concat,
+  cons, head, tail, isEmpty, isList, reverse, toString, push, count, concat, map,
 } from '../src';
 
 describe('List', () => {
@@ -83,5 +83,11 @@ describe('List', () => {
     const list2 = cons(4, 5);
     const concatedList = concat(list, list2);
     expect(toString(concatedList)).toBe('(1, 2, 3, 4, 5)');
+  });
+
+  it('#map', () => {
+    const list = cons(1, 2, 3);
+    const squaredList = map(el => el ** 2, list);
+    expect(toString(squaredList)).toBe('(1, 4, 9)');
   });
 });

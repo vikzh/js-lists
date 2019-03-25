@@ -119,6 +119,19 @@ const concat = (list1, list2) => {
   return pairs.cons(head(list1), concat(tail(list1), list2));
 };
 
+const map = (f, elements) => {
+  checkList(elements);
+
+  const iter = (curElements, acc) => {
+    if (isEmpty(curElements)) {
+      return reverse(acc);
+    }
+
+    return iter(tail(curElements), push(f(head(curElements)), acc));
+  };
+  return iter(elements, cons());
+};
+
 export {
-  cons, head, tail, isEmpty, toString, has, count, reverse, isList, push, concat,
+  cons, head, tail, isEmpty, toString, has, count, reverse, isList, push, concat, map,
 };
