@@ -144,5 +144,6 @@ const reduce = (f, acc, elements) => {
 };
 
 export {
-  cons, head, tail, isEmpty, toString, has, count, reverse, isList, push, concat, map, filter, reduce,
+  cons, head, tail, isEmpty, toString, has, count, reverse, isList, push,
+  concat, map, filter, reduce,
 };
