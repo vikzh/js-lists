@@ -1,5 +1,13 @@
 import * as pairs from 'pairs-js';
 
+/**
+ * Make a list
+ * @param args
+ * @returns {list}
+ * @example
+ * cons(1, 2, 3); // (1, 2, 3)
+ * cons(); // ()
+ */
 const cons = (...args) => {
   const iter = (elements) => {
     if (!elements.length) {
@@ -11,6 +19,15 @@ const cons = (...args) => {
   return iter(args);
 };
 
+/**
+ * Check if arguments is list
+ * @param list
+ * @returns {boolean}
+ * @example
+ * isList(cons()); // true
+ * isList(cons(1, 2)); // true
+ * isList('text'); // false
+ */
 const isList = (list) => {
   if (list === null) {
     return true;
@@ -35,26 +52,64 @@ const checkList = (list) => {
   }
 };
 
+/**
+ * Get head element
+ * @param list
+ * @returns {*}
+ * @example
+ * head(cons(1, 2)); // 1
+ */
 const head = (list) => {
   checkList(list);
   return pairs.car(list);
 };
 
+/**
+ * Get tail element
+ * @param list
+ * @returns {*}
+ * @example
+ * tail(cons(1, 2, 3)); // (2, 3)
+ */
 const tail = (list) => {
   checkList(list);
   return pairs.cdr(list);
 };
 
+/**
+ * Check if list is empty
+ * @param list
+ * @returns {boolean}
+ * @example
+ * isEmpty(cons(1, 2)); // false
+ * isEmpty(cons()); //true
+ */
 const isEmpty = (list) => {
   checkList(list);
   return list === null;
 };
 
+/**
+ * Add element to list
+ * @param element
+ * @param list
+ * @returns {list}
+ * @example
+ * push(3, cons(2, 1)); // (3, 2, 1)
+ */
 const push = (element, list) => {
   checkList(list);
   return pairs.cons(element, list);
 };
 
+/**
+ * Convert list to string
+ * @param list
+ * @returns {string}
+ * @example
+ * toString(cons(1, 2, 3)); // (1, 2, 3);
+ * toString(cons(1, cons(2, 3))); // (1, (2, 3));
+ */
 const toString = (list) => {
   if (!isList(list)) {
     if (pairs.isPair(list)) {
@@ -83,6 +138,15 @@ const toString = (list) => {
   return `(${rec(list)})`;
 };
 
+/**
+ * Check if list has an element
+ * @param value
+ * @param list
+ * @returns {boolean}
+ * @example
+ * has(1, cons(1, 2)); // true
+ * has(5, cons(1, 2)); // false
+ */
 const has = (value, list) => {
   checkList(list);
   if (isEmpty(list)) {
@@ -94,6 +158,14 @@ const has = (value, list) => {
   return has(value, tail(list));
 };
 
+/**
+ * Get number of elements in a list
+ * @param list
+ * @returns {int}
+ * @example
+ * count(cons(1, 2, 3)); // 3
+ * count(cons()); // 0
+ */
 const count = (list) => {
   checkList(list);
   if (isEmpty(list)) {
@@ -104,6 +176,13 @@ const count = (list) => {
   return iter(list, 0);
 };
 
+/**
+ * Reverse list
+ * @param list
+ * @returns {list}
+ * @example
+ * reverse(cons(1, 2, 3)); // (3, 2, 1)
+ */
 const reverse = (list) => {
   checkList(list);
   const iter = (curElements, acc) => (isEmpty(curElements)
@@ -112,6 +191,14 @@ const reverse = (list) => {
   return iter(list, cons());
 };
 
+/**
+ * Join 2 lists
+ * @param list1
+ * @param list2
+ * @returns {list}
+ * @example
+ * concat(cons(1, 2), cons(3, 4)); // (1, 2, 3, 4)
+ */
 const concat = (list1, list2) => {
   if (isEmpty(list1)) {
     return list2;
@@ -119,6 +206,15 @@ const concat = (list1, list2) => {
   return pairs.cons(head(list1), concat(tail(list1), list2));
 };
 
+/**
+ * Map list
+ * @param f
+ * @param list
+ * @returns {list}
+ * @example
+ * const list = cons(1, 2, 3);
+ * map(el => el ** 2, list); // (1, 4, 9)
+ */
 const map = (f, list) => {
   checkList(list);
   if (isEmpty(list)) {
@@ -127,6 +223,15 @@ const map = (f, list) => {
   return push(f(head(list)), map(f, tail(list)));
 };
 
+/**
+ * Filter list
+ * @param f
+ * @param list
+ * @returns {list}
+ * @example
+ * const list = cons(-1, 2, -5, 0, 9);
+ * filter(el => el > 0, list); // (2, 9)
+ */
 const filter = (f, list) => {
   checkList(list);
   if (isEmpty(list)) {
@@ -135,6 +240,15 @@ const filter = (f, list) => {
   return f(head(list)) ? push(head(list), filter(f, tail(list))) : filter(f, tail(list));
 };
 
+/**
+ * Reduce list
+ * @param f
+ * @param acc
+ * @param elements
+ * @returns {*}
+ * @example
+ * reduce((el, acc) => acc + 1, 0, cons(1, 2, 3)); // 3
+ */
 const reduce = (f, acc, elements) => {
   if (isEmpty(elements)) {
     return acc;
