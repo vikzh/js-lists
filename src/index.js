@@ -257,7 +257,19 @@ const reduce = (f, acc, elements) => {
   return reduce(f, f(head(elements), acc), tail(elements));
 };
 
+const take = (countNum, list) => {
+  const iter = (curNum, curList) => {
+    if (curNum === countNum || isEmpty(curList)) {
+      return cons();
+    }
+
+    return push(head(curList), iter(curNum + 1, tail(curList)));
+  };
+
+  return iter(0, list);
+};
+
 export {
   cons, head, tail, isEmpty, toString, has, count, reverse, isList, push,
-  concat, map, filter, reduce,
+  concat, map, filter, reduce, take,
 };
